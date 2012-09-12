@@ -27,11 +27,14 @@
 package com.salesforce.samples.vfconnector;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 
 import com.salesforce.androidsdk.app.ForceApp;
+import com.salesforce.androidsdk.phonegap.CredentialStoragePlugin;
 import com.salesforce.androidsdk.ui.SalesforceDroidGapActivity;
 import com.salesforce.androidsdk.ui.SalesforceR;
-
+import android.content.*;
+import android.preference.*;
 
 /**
  * Application class 
@@ -41,6 +44,15 @@ import com.salesforce.androidsdk.ui.SalesforceR;
 public class VFConnectorApp extends ForceApp {
 
 	private SalesforceR salesforceR = new SalesforceRImpl();
+	
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		super.onCreate();
+		
+		SharedPreferences preferences=PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+		CredentialStoragePlugin.s_pref=preferences;
+	}
 	
 	@Override
 	public Class<? extends Activity> getMainActivityClass() {
