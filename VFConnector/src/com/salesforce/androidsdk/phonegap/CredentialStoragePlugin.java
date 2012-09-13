@@ -44,8 +44,8 @@ public class CredentialStoragePlugin extends  Plugin {
 	 * Supported plugin actions that the client can take.
 	 */
 	enum Action {
-		getCredentials,
-		setCredentials
+		getAuthCredentials,
+		setJSONCredentials
 	}
 	
 	
@@ -64,8 +64,8 @@ public class CredentialStoragePlugin extends  Plugin {
     	try {
     		action = Action.valueOf(actionStr);
 			switch(action) {
-				case getCredentials:       	return setJSONCredentials(args, callbackId);  
-				case setCredentials: 	return getAuthCredentials(callbackId);
+				case setAuthCredentials:       	return setJSONCredentials(args, callbackId);  
+				case getJSONCredentials: 	return getAuthCredentials(callbackId);
 				default: return new PluginResult(PluginResult.Status.INVALID_ACTION, actionStr); // should never happen
 	    	}
     	}
@@ -96,10 +96,18 @@ public class CredentialStoragePlugin extends  Plugin {
 		}
 		else {
 			Log.i("SalesforceOAuthPlugin.getAuthCredentials", "getAuthCredentials successful");
-			return new PluginResult(PluginResult.Status.OK, getJSONCredentials());
+			return new PluginResult(PluginResult.Status.OK, getJSONCredentials(username,password));
 		}
 	}
 	
+	private static JSONObject getJSONCredentials(String username,String password) {
+		
+		Map<String, String> data = new HashMap<String, String>();
+		data.put("username", username);
+		data.put("password", password);
+		
+		return new JSONObject(data);
+    }
 
 	/**
 	 * Native implementation for "authenticate" action
