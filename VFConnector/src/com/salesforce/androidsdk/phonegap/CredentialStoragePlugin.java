@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+  //
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,7 +126,7 @@ public class CredentialStoragePlugin extends  Plugin {
 		arr[0]=username;
 		arr[1]=password;
 		
-		////yyyyyyyyyyyyyyy
+		////yyyyyyyyyyyyyyySA
 		PluginResult noop = new PluginResult(PluginResult.Status.NO_RESULT,new JSONArray(Arrays.asList(arr)));
 		noop.setKeepCallback(true);
 		return noop;
