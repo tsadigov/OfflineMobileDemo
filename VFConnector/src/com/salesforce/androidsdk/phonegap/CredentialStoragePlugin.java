@@ -64,7 +64,7 @@ public class CredentialStoragePlugin extends  Plugin {
     	try {
     		action = Action.valueOf(actionStr);
 			switch(action) {
-				case getCredentials:       	return authenticate(args, callbackId);  
+				case getCredentials:       	return setJSONCredentials(args, callbackId);  
 				case setCredentials: 	return getAuthCredentials(callbackId);
 				default: return new PluginResult(PluginResult.Status.INVALID_ACTION, actionStr); // should never happen
 	    	}
@@ -96,7 +96,7 @@ public class CredentialStoragePlugin extends  Plugin {
 		}
 		else {
 			Log.i("SalesforceOAuthPlugin.getAuthCredentials", "getAuthCredentials successful");
-			return new PluginResult(PluginResult.Status.OK, getJSONCredentials(username,password));
+			return new PluginResult(PluginResult.Status.OK, getJSONCredentials());
 		}
 	}
 	
@@ -108,7 +108,7 @@ public class CredentialStoragePlugin extends  Plugin {
 	 * @return NO_RESULT since authentication is asynchronous.
 	 * @throws JSONException 
 	 */
-	protected PluginResult authenticate(JSONArray args, final String callbackId) throws JSONException {
+	protected PluginResult setJSONCredentials(JSONArray args, final String callbackId) throws JSONException {
 		Log.i("SalesforceOAuthPlugin.authenticate", "authenticate called");
 		JSONObject oauthProperties = new JSONObject((String) args.get(0));
 		//Credentials credentials= parseCredentials(oauthProperties);
@@ -127,12 +127,20 @@ public class CredentialStoragePlugin extends  Plugin {
 		arr[1]=password;
 		
 		////yyyyyyyyyyyyyyySA
-		PluginResult noop = new PluginResult(PluginResult.Status.NO_RESULT,new JSONArray(Arrays.asList(arr)));
+		
+		PluginResult noop = new PluginResult(PluginResult.Status.NO_RESULT,"ttt");
 		noop.setKeepCallback(true);
 		return noop;
 	}
 
-	private static JSONObject getJSONCredentials(String username,String password) {		
+	private static JSONObject getJSONCredentials() {
+		String username;
+		String password;
+		
+		
+		username=s_pref.getString("username","");
+		password=s_pref.getString("password","");
+		
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("username", username);
 		data.put("password", password);
