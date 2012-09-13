@@ -121,7 +121,11 @@ public class CredentialStoragePlugin extends  Plugin {
 		editor.putString("password", password);
 		editor.commit();
 		
-		PluginResult noop = new PluginResult(PluginResult.Status.NO_RESULT,new JSONArray(username,password));
+		String [] arr=new String[2];
+		
+		arr[0]=username;
+		arr[1]=password;
+		PluginResult noop = new PluginResult(PluginResult.Status.NO_RESULT,new JSONArray(Arrays.asList(arr)));
 		noop.setKeepCallback(true);
 		return noop;
 	}
