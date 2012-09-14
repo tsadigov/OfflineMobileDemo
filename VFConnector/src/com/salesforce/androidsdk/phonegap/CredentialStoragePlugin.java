@@ -32,6 +32,7 @@ import com.salesforce.androidsdk.rest.RestClient.AsyncRequestCallback;
 import com.salesforce.androidsdk.rest.RestClient.ClientInfo;
 import com.salesforce.androidsdk.rest.RestRequest;
 import com.salesforce.androidsdk.rest.RestResponse;
+import com.salesforce.androidsdk.security.Encryptor;
 import com.salesforce.androidsdk.ui.SalesforceGapViewClient;
 
 /**
@@ -39,6 +40,8 @@ import com.salesforce.androidsdk.ui.SalesforceGapViewClient;
  */
 public class CredentialStoragePlugin extends  Plugin {
 	public static SharedPreferences s_pref;
+	
+	String Key="D/rwdMPEQbfq/eeKlzVkTw==";
 	
 	/**
 	 * Supported plugin actions that the client can take.
@@ -87,7 +90,9 @@ public class CredentialStoragePlugin extends  Plugin {
 	protected PluginResult getAuthCredentials(String callbackId) throws JSONException {
 		Log.i("SalesforceOAuthPlugin.getAuthCredentials", "getAuthCredentials called");
 		
+		//String username=Encryptor.decrypt(s_pref.getString("username", ""),Key);
 		String username=s_pref.getString("username", "");
+		//String password=Encryptor.decrypt(s_pref.getString("password", ""),Key);
 		String password=s_pref.getString("password", "");
 		
 		if (username == null || password==null) {
@@ -121,7 +126,9 @@ public class CredentialStoragePlugin extends  Plugin {
 		JSONObject oauthProperties = (JSONObject)args.get(0);
 		//Credentials credentials= parseCredentials(oauthProperties);
 		
+		//String username = Encryptor.encrypt(oauthProperties.getString("username"),Key);
 		String username = oauthProperties.getString("username");
+		//String password = Encryptor.encrypt(oauthProperties.getString("password"), Key);
 		String password = oauthProperties.getString("password");
 		
 		Editor editor=s_pref.edit();
@@ -129,10 +136,6 @@ public class CredentialStoragePlugin extends  Plugin {
 		editor.putString("password", password);
 		editor.commit();
 		
-		String [] arr=new String[2];
-		
-		arr[0]=username;
-		arr[1]=password;
 		
 		////yyyyyyyyyyyyyyySA
 		
