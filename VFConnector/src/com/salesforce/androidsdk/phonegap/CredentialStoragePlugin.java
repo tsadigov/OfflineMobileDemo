@@ -45,7 +45,7 @@ public class CredentialStoragePlugin extends  Plugin {
 	 */
 	enum Action {
 		getAuthCredentials,
-		setJSONCredentials
+		setAuthCredentials
 	}
 	
 	
@@ -64,8 +64,8 @@ public class CredentialStoragePlugin extends  Plugin {
     	try {
     		action = Action.valueOf(actionStr);
 			switch(action) {
-				case setAuthCredentials:       	return setJSONCredentials(args, callbackId);  
-				case getJSONCredentials: 	return getAuthCredentials(callbackId);
+				case setAuthCredentials:    return setAuthCredentials(args, callbackId);  
+				case getAuthCredentials: 	return getAuthCredentials(callbackId);
 				default: return new PluginResult(PluginResult.Status.INVALID_ACTION, actionStr); // should never happen
 	    	}
     	}
@@ -105,7 +105,7 @@ public class CredentialStoragePlugin extends  Plugin {
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("username", username);
 		data.put("password", password);
-		
+	
 		return new JSONObject(data);
     }
 
@@ -116,9 +116,9 @@ public class CredentialStoragePlugin extends  Plugin {
 	 * @return NO_RESULT since authentication is asynchronous.
 	 * @throws JSONException 
 	 */
-	protected PluginResult setJSONCredentials(JSONArray args, final String callbackId) throws JSONException {
+	protected PluginResult setAuthCredentials(JSONArray args, final String callbackId) throws JSONException {
 		Log.i("SalesforceOAuthPlugin.authenticate", "authenticate called");
-		JSONObject oauthProperties = new JSONObject((String) args.get(0));
+		JSONObject oauthProperties = (JSONObject)args.get(0);
 		//Credentials credentials= parseCredentials(oauthProperties);
 		
 		String username = oauthProperties.getString("username");

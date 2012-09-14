@@ -16,6 +16,7 @@
     <plugin name="Temperature" value="com.phonegap.TempListener"/>
     <plugin name="FileTransfer" value="com.phonegap.FileTransfer"/>
     <plugin name="Capture" value="com.phonegap.Capture"/>
+    <plugin name="credentialStorage" value="com.salesforce.androidsdk.phonegap.CredentialStoragePlugin"/>
     <plugin name="com.salesforce.oauth" value="com.salesforce.androidsdk.phonegap.SalesforceOAuthPlugin"/>
     <plugin name="com.salesforce.smartstore" value="com.salesforce.androidsdk.phonegap.SmartStorePlugin"/>
     <plugin name="com.salesforce.testrunner" value="com.salesforce.androidsdk.phonegap.TestRunnerPlugin"/>
