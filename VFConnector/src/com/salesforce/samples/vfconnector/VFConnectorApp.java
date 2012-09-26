@@ -26,11 +26,17 @@
  */
 package com.salesforce.samples.vfconnector;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 
 import com.salesforce.androidsdk.app.ForceApp;
 import com.salesforce.androidsdk.phonegap.CredentialStoragePlugin;
+import com.salesforce.androidsdk.phonegap.MyMainActivity;
 import com.salesforce.androidsdk.ui.SalesforceDroidGapActivity;
 import com.salesforce.androidsdk.ui.SalesforceR;
 import android.content.*;
@@ -52,11 +58,40 @@ public class VFConnectorApp extends ForceApp {
 		
 		SharedPreferences preferences=PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 		CredentialStoragePlugin.s_pref=preferences;
+		
+		/*
+	    //--------------------------------------------
+		 
+		// Create a trust manager that does not validate certificate chains
+		TrustManager[] trustAllCerts = new TrustManager[]{
+		    new X509TrustManager() {
+		        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+		            return null;
+		        }
+		        public void checkClientTrusted(
+		            java.security.cert.X509Certificate[] certs, String authType) {
+		        }
+		        public void checkServerTrusted(
+		            java.security.cert.X509Certificate[] certs, String authType) {
+		        }
+		    }
+		};
+
+		// Install the all-trusting trust manager
+		try {
+		    SSLContext sc = SSLContext.getInstance("SSL");
+		    sc.init(null, trustAllCerts, new java.security.SecureRandom());
+		    HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+		} catch (Exception e) {
+		}
+		*/
+		//--------------------------
 	}
 	
 	@Override
 	public Class<? extends Activity> getMainActivityClass() {
-		return SalesforceDroidGapActivity.class;
+		
+		return MyMainActivity.class;
 	}
 	
 	@Override

@@ -24,7 +24,7 @@ var oauthScopes =[];// ["web", "api"];
 //application.  The default representations are below, or you can look at the data
 //classes in SFHybridApp.js to see how you can further customize your options.
 //var startData = new SFHybridApp.LocalAppStartData();  // Used for local REST-based "index.html" PhoneGap apps.
-var startData = new SFHybridApp.RemoteAppStartData("/","http://omni-developer-edition.na9.force.com",true); // Used for Visualforce-based apps.
+var startData = new SFHybridApp.RemoteAppStartData("https://technicalambassador.config1.cs8.force.com/apex/MainPage",true,false); // Used for Visualforce-based apps.
 
  	
 // Whether the container app should automatically refresh our oauth session on app foreground:
