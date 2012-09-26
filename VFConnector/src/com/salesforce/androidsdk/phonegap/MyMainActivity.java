@@ -7,6 +7,7 @@ import com.salesforce.androidsdk.ui.SalesforceGapViewClient;
 public class MyMainActivity extends SalesforceDroidGapActivity {
 	@Override
     protected GapViewClient createWebViewClient() {
+		
 		MyViewClient result = new MyViewClient(this,this);
     	return result;
     }

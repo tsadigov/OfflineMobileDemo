@@ -89,8 +89,7 @@ public class VFConnectorApp extends ForceApp {
 	}
 	
 	@Override
-	public Class<? extends Activity> getMainActivityClass() {
-		
+	public Class<? extends Activity> getMainActivityClass() {		
 		return MyMainActivity.class;
 	}
 	

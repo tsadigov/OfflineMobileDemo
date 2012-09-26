@@ -11,6 +11,7 @@ import com.salesforce.androidsdk.ui.SalesforceGapViewClient;
 public class MyViewClient extends SalesforceGapViewClient {
 	public MyViewClient(DroidGap droidGap, DroidGap ctx) {
 		super(droidGap,ctx);
+		Log.i(TAG,"replace with MyViewClient");
 	}
 	
 	 @Override
